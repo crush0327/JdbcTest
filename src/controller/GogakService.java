@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public interface GogakService {
 
-    void connect(String dsn) throws SQLException;
+    void connect(String dsn);
 
     void close();
 
@@ -15,11 +15,11 @@ public interface GogakService {
 
     void selectAll(String className) throws SQLException, IOException;
 
-    void insert(String className) throws SQLException, IOException;
+    void insert(String className) throws IOException;
 
-    void update(String className) throws SQLException, IOException;
+    void update(String className) throws IOException;
 
-    void delete(String className) throws SQLException, IOException;
+    void delete(String className) throws IOException;
 
     void selectByGno(String className) throws SQLException, IOException;
 }

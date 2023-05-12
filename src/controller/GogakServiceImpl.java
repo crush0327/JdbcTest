@@ -1,10 +1,21 @@
 package controller;
 
-import db_conn.util.ConnectionHelper;
-import model.GogakDTO;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.ArrayList;
 
-import java.io.*;
-import java.sql.*;
+import dbConn.util.ConnectionHelper;
+import model.GogakDTO;
 
 public class GogakServiceImpl implements GogakService {
 
@@ -21,7 +32,7 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void connect(String dsn) throws SQLException {
+    public void connect(String dsn) {
         try {
             conn = ConnectionHelper.getConnection("ORACLE");
             stmt = conn.createStatement();
@@ -115,11 +126,39 @@ public class GogakServiceImpl implements GogakService {
 
     @Override
     public void selectAll(String className) throws SQLException, IOException {
+    	rs = stmt.executeQuery("SELECT * FROM " + className);
 
+		ResultSetMetaData rsmd = rs.getMetaData();
+		int count = rsmd.getColumnCount();
+		while (rs.next()) {
+			for (int i = 1; i <= count; i++) {
+				switch (rsmd.getColumnType(i)) {
+				case Types.NUMERIC:
+				case Types.INTEGER:
+					System.out.println(rsmd.getColumnName(i) + " : " + rs.getInt(i) + " ");
+					break;
+				case Types.FLOAT:
+					System.out.println(rsmd.getColumnName(i) + " : " + rs.getFloat(i) + " ");
+					break;
+				case Types.DOUBLE:
+					System.out.println(rsmd.getColumnName(i) + " : " + rs.getDouble(i) + " ");
+					break;
+				case Types.CHAR:
+					System.out.println(rsmd.getColumnName(i) + " : " + rs.getString(i) + " ");
+					break;
+				case Types.DATE:
+					System.out.println(rsmd.getColumnName(i) + " : " + rs.getDate(i) + " ");
+				default:
+					System.out.println(rsmd.getColumnName(i) + " : " + rs.getString(i) + " ");
+					break;
+				}
+			}
+			System.out.println();
+		}
     }
 
     @Override
-    public void insert(String className) throws SQLException, IOException {
+    public void insert(String className) throws IOException {
         System.out.print("GNO : ");
         String gno = BR.readLine();
 
@@ -148,12 +187,12 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void update(String className) throws SQLException, IOException {
+    public void update(String className) throws IOException {
 
     }
 
     @Override
-    public void delete(String className) throws SQLException, IOException {
+    public void delete(String className) throws IOException {
 
         System.out.print("GNO: ");
         int gno = Integer.parseInt(BR.readLine());
@@ -170,7 +209,34 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void selectByGno(String className) throws SQLException, IOException {
+	public void selectByGno(String className) throws SQLException, IOException {
+		pstmt = conn.prepareStatement("select * from " + className + " where gno =? ");
+		System.out.print("검색할 사람의 GNO(고객번호)을 입력: ");
+		int gno = Integer.parseInt(BR.readLine());
+		pstmt.setInt(1, gno);
+		rs = pstmt.executeQuery();
+		ArrayList<GogakDTO> list = new ArrayList();
+		while (rs.next()) {
+			GogakDTO gogak = new GogakDTO();
+			gogak.setGno(rs.getInt("GNO"));
+			gogak.setGname(rs.getString("GNAME"));
+			gogak.setJumin(rs.getString("JUMIN"));
+			gogak.setPoint(rs.getInt("POINT"));
+			list.add(gogak);
+		}
 
-    }
+		if (list.size() == 0) {
+			System.out.println("검색된 고객번호가 없습니다.");
+			System.out.println();
+			return;
+		}
+
+		for (GogakDTO gogak : list) {
+			System.out.println("GNO: " + gogak.getGno());
+			System.out.println("GNAME: " + gogak.getGname());
+			System.out.println("JUMIN: " + gogak.getJumin());
+			System.out.println("POINT: " + gogak.getPoint());
+			System.out.println();
+		}
+	}
 }
