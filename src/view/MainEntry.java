@@ -8,10 +8,11 @@ import java.sql.SQLException;
 
 public class MainEntry {
 
-	private static final GogakService SERVICE = GogakServiceImpl.getInstance();
-	public static void main(String[] args) throws SQLException, IOException {
+    private static final GogakService SERVICE = GogakServiceImpl.getInstance();
 
-		SERVICE.connect("ORACLE");
-		SERVICE.menu();
-	}
+    public static void main(String[] args) throws SQLException, IOException {
+
+        SERVICE.connect("ORACLE");
+        SERVICE.menu();
+    }
 }
