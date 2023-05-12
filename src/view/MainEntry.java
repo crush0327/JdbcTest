@@ -10,9 +10,9 @@ public class MainEntry {
 
     private static final GogakService SERVICE = GogakServiceImpl.getInstance();
 
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) throws IOException, SQLException {
 
-        SERVICE.connect("ORACLE");
+        SERVICE.connect("ORACLE");  // ORACLE JDBC
         SERVICE.menu();
     }
 }

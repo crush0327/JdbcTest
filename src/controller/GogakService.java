@@ -9,17 +9,17 @@ public interface GogakService {
 
     void close();
 
-    void info();
+    void info() throws IOException;
 
-    void menu() throws SQLException, IOException;
+    void menu() throws IOException, SQLException;
 
-    void selectAll(String className) throws SQLException, IOException;
+    void selectAll(String className) throws IOException, SQLException;
 
-    void insert(String className) throws IOException;
+    void insert(String className) throws IOException, SQLException;
 
-    void update(String className) throws IOException;
+    void update(String className) throws IOException, SQLException;
 
-    void delete(String className) throws IOException;
+    void delete(String className) throws IOException, SQLException;
 
-    void selectByGno(String className) throws SQLException, IOException;
+    void selectByGno(String className) throws IOException, SQLException;
 }

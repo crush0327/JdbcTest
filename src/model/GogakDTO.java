@@ -2,15 +2,15 @@ package model;
 
 public class GogakDTO {
 
-    public final String ClassName = "Gogak";
+    private int gno;    // 고객번호
+    private String gname;   // 고객명
+    private String jumin;   // 주민등록번호
+    private int point;  // 마일리지 점수
 
-    private int gno;
-    private String gname;
-    private String jumin;
-    private int point;
+    public static final String CLASS_NAME = "Gogak";
 
     public String getClassName() {
-        return ClassName;
+        return CLASS_NAME;
     }
 
     public int getGno() {
