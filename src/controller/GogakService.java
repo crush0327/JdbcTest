@@ -9,15 +9,15 @@ public interface GogakService {
 
     void close();
 
-    void menu() throws IOException, SQLException;
+    void menu() throws SQLException, IOException;
 
     void selectAll(String className) throws SQLException, IOException;
 
-    void insert(String className) throws IOException;
+    void insert(String className) throws SQLException, IOException;
 
-    void update();
+    void update(String className) throws SQLException, IOException;
 
-    void delete(String className) throws IOException;
+    void delete(String className) throws SQLException, IOException;
 
     void selectByGno(String className) throws SQLException, IOException;
 }

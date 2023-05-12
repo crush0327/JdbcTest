@@ -28,7 +28,7 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void menu() throws IOException, SQLException {
+    public void menu() throws SQLException, IOException {
 
     }
 
@@ -38,17 +38,17 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void insert(String className) throws IOException {
+    public void insert(String className) throws SQLException, IOException {
 
     }
 
     @Override
-    public void update() {
+    public void update(String className) throws SQLException, IOException {
 
     }
 
     @Override
-    public void delete(String className) throws IOException {
+    public void delete(String className) throws SQLException, IOException {
 
     }
 
