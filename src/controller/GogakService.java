@@ -5,9 +5,11 @@ import java.sql.SQLException;
 
 public interface GogakService {
 
-    void connect(String dsn, String uid, String pwd) throws SQLException;
+    void connect(String dsn) throws SQLException;
 
     void close();
+
+    void info();
 
     void menu() throws SQLException, IOException;
 

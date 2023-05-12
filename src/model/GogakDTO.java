@@ -2,10 +2,16 @@ package model;
 
 public class GogakDTO {
 
+    public final String ClassName = "Gogak";
+
     private int gno;
     private String gname;
     private String jumin;
     private int point;
+
+    public String getClassName() {
+        return ClassName;
+    }
 
     public int getGno() {
         return gno;
