@@ -1,4 +1,4 @@
-package controller;
+package kr.or.sw.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;

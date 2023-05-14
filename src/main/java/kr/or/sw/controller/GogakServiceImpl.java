@@ -1,7 +1,7 @@
-package controller;
+package kr.or.sw.controller;
 
-import dbConn.util.ConnectionHelper;
-import model.GogakDTO;
+import kr.or.sw.model.GogakDTO;
+import kr.or.sw.util.ConnectionHelper;
 
 import java.io.*;
 import java.sql.*;
@@ -29,6 +29,7 @@ public class GogakServiceImpl implements GogakService {
 
     @Override
     public void connect(String dsn) {
+
         try {
             conn = ConnectionHelper.getConnection(dsn);
             stmt = conn.createStatement();
@@ -48,7 +49,8 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void close() {
+    public synchronized void close() {
+
         try {
             if (rs != null)
                 rs.close();
@@ -72,7 +74,8 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void info() throws IOException {
+    public synchronized void info() throws IOException {
+
         BW.write("-=-=-=-=-= JDBC Query =-=-=-=-=-\n" +
                 "\t0. ROLLBACK\n" +
                 "\t1. 전체 보기\n" +
@@ -87,7 +90,8 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void menu() throws SQLException, IOException {
+    public synchronized void menu() throws SQLException, IOException {
+
         GogakDTO dto = new GogakDTO();
         while (true) {
             info();
@@ -134,9 +138,9 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void selectAll(String className) throws SQLException, IOException {
-        rs = stmt.executeQuery("SELECT * FROM " + className);
+    public synchronized void selectAll(String className) throws SQLException, IOException {
 
+        rs = stmt.executeQuery("SELECT * FROM " + className);
         ResultSetMetaData rsmd = rs.getMetaData();
         int count = rsmd.getColumnCount();
         while (rs.next()) {
@@ -168,7 +172,8 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void insert(String className) throws IOException, SQLException, NumberFormatException {
+    public synchronized void insert(String className) throws IOException, SQLException, NumberFormatException {
+
         BW.write("GNO : ");
         BW.flush();
         int gno = Integer.parseInt(BR.readLine());
@@ -197,7 +202,8 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void update(String className) throws IOException, SQLException, NumberFormatException {
+    public synchronized void update(String className) throws IOException, SQLException, NumberFormatException {
+
         BW.write("수정할 고객 번호를 입력해주세요.\n");
         BW.flush();
         int gno = Integer.parseInt(BR.readLine());
@@ -229,7 +235,7 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void delete(String className) throws IOException, SQLException, NumberFormatException {
+    public synchronized void delete(String className) throws IOException, SQLException, NumberFormatException {
 
         BW.write("GNO: ");
         BW.flush();
@@ -244,7 +250,8 @@ public class GogakServiceImpl implements GogakService {
     }
 
     @Override
-    public void selectByGno(String className) throws SQLException, IOException, NumberFormatException {
+    public synchronized void selectByGno(String className) throws SQLException, IOException, NumberFormatException {
+
         pstmt = conn.prepareStatement("SELECT * FROM " + className + " WHERE gno = ?");
         BW.write("검색할 사람의 GNO(고객번호) 입력: ");
         BW.flush();

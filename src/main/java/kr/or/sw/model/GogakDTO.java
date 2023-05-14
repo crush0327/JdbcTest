@@ -1,4 +1,4 @@
-package model;
+package kr.or.sw.model;
 
 public class GogakDTO {
 
