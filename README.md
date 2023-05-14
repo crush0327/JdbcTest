@@ -1,4 +1,5 @@
-![daebo_logo](https://github.com/crush0327/JdbcTest/assets/109461345/cd01e521-7220-4719-937a-93a70ee0e489)
+<img width="353" alt="스크린샷 2023-05-15 오전 3 21 25" src="https://github.com/crush0327/JdbcTest/assets/109461345/1124760c-f593-490d-87e1-fecff3fdcbfb">
+
 # 5월 12일 고객관리 시스템 MVC JDBC 과제
 ### 프로젝트 클론 후 할 일
 1. jdbc 관련 라이브러리 다운로드 후 프로젝트에 추가 <a href="https://www.oracle.com/kr/database/technologies/appdev/jdbc-downloads.html">ojdbc8 다운로드 링크</a>
