@@ -1,7 +1,7 @@
-package view;
+package kr.or.sw.view;
 
-import controller.GogakService;
-import controller.GogakServiceImpl;
+import kr.or.sw.controller.GogakService;
+import kr.or.sw.controller.GogakServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
